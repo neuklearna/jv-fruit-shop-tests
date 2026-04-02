@@ -39,7 +39,7 @@ public class ReturnOperationTest {
     }
 
     @Test
-    void handle_nullTransaction_notOk() {
+    void handle_nullTransaction_NotOk() {
         Storage storage = new Storage();
         ReturnOperation returnOperation = new ReturnOperation(storage);
 

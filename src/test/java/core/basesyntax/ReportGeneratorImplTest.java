@@ -10,17 +10,16 @@ import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.strategy.BalanceOperation;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 public class ReportGeneratorImplTest {
 
     @Test
     void getReport_oneFruit_ok() {
         Storage storage = new Storage();
+        Map<String, Integer> fruitFromStorage = storage.getStorage();
         ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
-        BalanceOperation operation = new BalanceOperation(storage);
-        FruitTransaction transaction = new FruitTransaction(100, "apple",
-                FruitTransaction.Operation.BALANCE);
-
-        operation.handle(transaction);
+        fruitFromStorage.put("apple", 100);
         String report = reportGenerator.getReport();
 
         assertEquals("fruit,quantity\napple,100\n", report);
@@ -29,15 +28,11 @@ public class ReportGeneratorImplTest {
     @Test
     void getReport_multipleFruits_ok() {
         Storage storage = new Storage();
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
-        BalanceOperation operation = new BalanceOperation(storage);
-        FruitTransaction transaction = new FruitTransaction(100, "apple",
-                FruitTransaction.Operation.BALANCE);
-        FruitTransaction transaction2 = new FruitTransaction(20, "banana",
-                FruitTransaction.Operation.BALANCE);
+        Map<String, Integer> fruitFromStorage = storage.getStorage();
+        fruitFromStorage.put("apple", 100);
+        fruitFromStorage.put("banana", 20);
 
-        operation.handle(transaction);
-        operation.handle(transaction2);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
 
         String report = reportGenerator.getReport();
         assertTrue(report.contains("apple,100"));

@@ -1,14 +1,13 @@
 package core.basesyntax;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-public class DataConventerImplTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class DataConverterImplTest {
 
     @Test
     void convertToTransaction_validData_ok() {
@@ -32,7 +31,8 @@ public class DataConventerImplTest {
         DataConverterImpl dataConverter = new DataConverterImpl();
 
         List<FruitTransaction> result = dataConverter.convertToTransaction(data);
-        assertEquals(1, result.size());
+        FruitTransaction takeFirst = result.get(0);
+        assertEquals(transaction, takeFirst);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class DataConventerImplTest {
 
         List<FruitTransaction> fruitTransactions = dataConverter.convertToTransaction(data);
 
-        assertEquals(4, fruitTransactions.size());
+        assertEquals(FruitTransaction.Operation.BALANCE, fruitTransactions.get(0).getOperation());
     }
 
     @Test
