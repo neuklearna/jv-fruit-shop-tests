@@ -1,11 +1,12 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class DataConverterImplTest {
 
@@ -38,7 +39,7 @@ public class DataConverterImplTest {
     @Test
     void convertToTransaction_allOperations_ok() {
         List<String> data = List.of("quantity,fruit,operation",
-                "r,apple,100",
+                "b,apple,100",
                 "p,apple,20",
                 "b,apple,30",
                 "s,apple,10");

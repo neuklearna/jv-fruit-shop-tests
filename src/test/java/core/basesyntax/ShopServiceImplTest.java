@@ -1,6 +1,8 @@
 package core.basesyntax;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
@@ -26,7 +28,7 @@ public class ShopServiceImplTest {
 
         shopService.process(List.of());
 
-        assertFalse(fakeOperationHandler.wasCalled);
+        assertFalse(fakeOperationHandler.isWasCalled());
     }
 
     @Test
@@ -38,11 +40,11 @@ public class ShopServiceImplTest {
         OperationStrategy strategy = new OperationStrategyImpl(operationStrategies);
         ShopService shopService = new ShopServiceImpl(strategy);
 
-        FruitTransaction transaction = new  FruitTransaction(100, "apple",
+        FruitTransaction transaction = new FruitTransaction(100, "apple",
                 FruitTransaction.Operation.BALANCE);
         shopService.process(List.of(transaction));
 
-        assertTrue(fakeOperationHandler.wasCalled);
+        assertTrue(fakeOperationHandler.isWasCalled());
     }
 
     @Test

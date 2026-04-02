@@ -3,14 +3,11 @@ package core.basesyntax;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
-import core.basesyntax.service.strategy.BalanceOperation;
-import org.junit.jupiter.api.Test;
-
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorImplTest {
 
