@@ -7,13 +7,20 @@ import core.basesyntax.model.Storage;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorImplTest {
 
+    private Storage storage;
+
+    @BeforeEach
+    void setUp() {
+        storage = new Storage();
+    }
+
     @Test
     void getReport_oneFruit_ok() {
-        Storage storage = new Storage();
         Map<String, Integer> fruitFromStorage = storage.getStorage();
         ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
         fruitFromStorage.put("apple", 100);
@@ -24,7 +31,6 @@ public class ReportGeneratorImplTest {
 
     @Test
     void getReport_multipleFruits_ok() {
-        Storage storage = new Storage();
         Map<String, Integer> fruitFromStorage = storage.getStorage();
         fruitFromStorage.put("apple", 100);
         fruitFromStorage.put("banana", 20);
@@ -38,7 +44,6 @@ public class ReportGeneratorImplTest {
 
     @Test
     void getReport_containsHeader_ok() {
-        Storage storage = new Storage();
         ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
 
         String report = reportGenerator.getReport();

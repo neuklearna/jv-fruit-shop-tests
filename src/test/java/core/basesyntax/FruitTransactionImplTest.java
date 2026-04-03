@@ -16,5 +16,7 @@ public class FruitTransactionImplTest {
         transaction.setOperation(FruitTransaction.Operation.SUPPLY);
 
         assertEquals(100, transaction.getQuantity());
+        assertEquals("apple", transaction.getFruit());
+        assertEquals(FruitTransaction.Operation.SUPPLY, transaction.getOperation());
     }
 }

@@ -7,13 +7,20 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.strategy.BalanceOperation;
 import core.basesyntax.service.strategy.SupplyOperation;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class SupplyOperationTest {
 
+    private Storage storage;
+
+    @BeforeEach
+    void setUp() {
+        storage = new Storage();
+    }
+
     @Test
     void handle_addToExisting_ok() {
-        Storage storage = new Storage();
         SupplyOperation operation = new SupplyOperation(storage);
         BalanceOperation operation2 = new BalanceOperation(storage);
         FruitTransaction startValue = new FruitTransaction(20, "banana",
@@ -29,7 +36,6 @@ public class SupplyOperationTest {
 
     @Test
     void handle_emptyStorage_ok() {
-        Storage storage = new Storage();
         SupplyOperation operation = new SupplyOperation(storage);
         FruitTransaction transaction = new FruitTransaction(100, "apple",
                 FruitTransaction.Operation.SUPPLY);
@@ -39,7 +45,6 @@ public class SupplyOperationTest {
 
     @Test
     void handle_multipleSupplies_ok() {
-        Storage storage = new Storage();
         SupplyOperation operation = new SupplyOperation(storage);
         BalanceOperation balanceOperation = new BalanceOperation(storage);
         FruitTransaction balanseOperationValue = new FruitTransaction(20, "apple",
@@ -58,7 +63,6 @@ public class SupplyOperationTest {
 
     @Test
     void handle_nullTransaction_notOk() {
-        Storage storage = new Storage();
         SupplyOperation operation = new SupplyOperation(storage);
 
         assertThrows(RuntimeException.class, () -> operation.handle(null));

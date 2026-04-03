@@ -14,13 +14,20 @@ import core.basesyntax.service.strategy.ReturnOperation;
 import core.basesyntax.service.strategy.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OperationStrategyImplTest {
 
+    private Storage storage;
+
+    @BeforeEach
+    void setUp() {
+        storage = new Storage();
+    }
+
     @Test
     void getHandler_balance_ok() {
-        Storage storage = new Storage();
         BalanceOperation balanceOperation = new BalanceOperation(storage);
         Map<FruitTransaction.Operation, OperationHandler> handler = new HashMap<>();
         handler.put(FruitTransaction.Operation.BALANCE, balanceOperation);
@@ -32,7 +39,6 @@ public class OperationStrategyImplTest {
 
     @Test
     void getHandler_purchase_ok() {
-        Storage storage = new Storage();
         PurchaseOperation purchaseOperation = new PurchaseOperation(storage);
         Map<FruitTransaction.Operation, OperationHandler> handler = new HashMap<>();
         handler.put(FruitTransaction.Operation.PURCHASE, purchaseOperation);
@@ -44,7 +50,6 @@ public class OperationStrategyImplTest {
 
     @Test
     void getHandler_supply_ok() {
-        Storage storage = new Storage();
         SupplyOperation supplyOperation = new SupplyOperation(storage);
         Map<FruitTransaction.Operation, OperationHandler> handler = new HashMap<>();
         handler.put(FruitTransaction.Operation.SUPPLY, supplyOperation);
@@ -56,7 +61,6 @@ public class OperationStrategyImplTest {
 
     @Test
     void getHandler_return_ok() {
-        Storage storage = new Storage();
         ReturnOperation returnOperation = new ReturnOperation(storage);
         Map<FruitTransaction.Operation, OperationHandler> handler = new HashMap<>();
         handler.put(FruitTransaction.Operation.RETURN, returnOperation);
@@ -68,7 +72,6 @@ public class OperationStrategyImplTest {
 
     @Test
     void getHandler_null_ok() {
-        Storage storage = new Storage();
         Map<FruitTransaction.Operation, OperationHandler> handler = new HashMap<>();
         OperationStrategy strategy = new OperationStrategyImpl(handler);
 

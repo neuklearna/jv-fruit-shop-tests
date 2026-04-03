@@ -6,14 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.strategy.BalanceOperation;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationTest {
 
+    private Storage storage;
+    private BalanceOperation balanceOperation;
+
+    @BeforeEach
+    void setUp() {
+        storage = new Storage();
+        balanceOperation = new BalanceOperation(storage);
+    }
+
     @Test
     void handle_validTransaction_ok() {
-        Storage storage = new Storage();
-        BalanceOperation balanceOperation = new BalanceOperation(storage);
         FruitTransaction transaction = new FruitTransaction(100, "banana",
                 FruitTransaction.Operation.BALANCE);
 
@@ -24,8 +32,6 @@ public class BalanceOperationTest {
 
     @Test
     void handle_twoFruits_ok() {
-        Storage storage = new Storage();
-        BalanceOperation balanceOperation = new BalanceOperation(storage);
         FruitTransaction transaction1 = new FruitTransaction(100,"banana",
                 FruitTransaction.Operation.BALANCE);
         FruitTransaction transaction2 = new FruitTransaction(50,"apple",
@@ -40,8 +46,6 @@ public class BalanceOperationTest {
 
     @Test
     void handle_overwriteExistingBalance_ok() {
-        Storage storage = new Storage();
-        BalanceOperation balanceOperation = new BalanceOperation(storage);
         FruitTransaction transaction1 = new FruitTransaction(100, "banana",
                 FruitTransaction.Operation.BALANCE);
         FruitTransaction transaction2 = new FruitTransaction(50, "banana",
@@ -55,9 +59,6 @@ public class BalanceOperationTest {
 
     @Test
     void handle_nullTransaction_notOk() {
-        Storage storage = new Storage();
-        BalanceOperation balanceOperation = new BalanceOperation(storage);
-
         assertThrows(RuntimeException.class, () -> balanceOperation.handle(null));
     }
 }
