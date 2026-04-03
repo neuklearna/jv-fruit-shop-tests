@@ -12,16 +12,13 @@ public class BalanceOperationTest {
 
     @Test
     void handle_validTransaction_ok() {
-        // GIVEN — przygotuj dane
         Storage storage = new Storage();
         BalanceOperation balanceOperation = new BalanceOperation(storage);
         FruitTransaction transaction = new FruitTransaction(100, "banana",
                 FruitTransaction.Operation.BALANCE);
 
-        // WHEN — wywołaj metodę
         balanceOperation.handle(transaction);
 
-        // THEN — sprawdź wynik
         assertEquals(100, storage.getStorage().get("banana"));
     }
 

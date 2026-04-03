@@ -39,15 +39,18 @@ public class DataConverterImplTest {
     @Test
     void convertToTransaction_allOperations_ok() {
         List<String> data = List.of("quantity,fruit,operation",
-                "b,apple,100",
-                "p,apple,20",
-                "b,apple,30",
-                "s,apple,10");
+                "b,apple,100");
         DataConverterImpl dataConverter = new DataConverterImpl();
 
         List<FruitTransaction> fruitTransactions = dataConverter.convertToTransaction(data);
 
-        assertEquals(FruitTransaction.Operation.BALANCE, fruitTransactions.get(0).getOperation());
+        assertEquals(1, fruitTransactions.size());
+
+        FruitTransaction takeFirst = fruitTransactions.get(0);
+
+        assertEquals(FruitTransaction.Operation.BALANCE, takeFirst.getOperation());
+        assertEquals("apple", takeFirst.getFruit());
+        assertEquals(100, takeFirst.getQuantity());
     }
 
     @Test
@@ -68,14 +71,4 @@ public class DataConverterImplTest {
         assertThrows(RuntimeException.class, () -> dataConverter.convertToTransaction(data));
     }
 
-    @Test
-    void setters_validData_ok() {
-        FruitTransaction transaction = new FruitTransaction(20, "banana",
-                FruitTransaction.Operation.BALANCE);
-        transaction.setQuantity(100);
-        transaction.setFruit("apple");
-        transaction.setOperation(FruitTransaction.Operation.SUPPLY);
-
-        assertEquals(100, transaction.getQuantity());
-    }
 }

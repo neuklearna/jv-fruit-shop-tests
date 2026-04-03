@@ -48,7 +48,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    void process_nullList_NotOk() {
+    void process_nullList_notOk() {
         Map<FruitTransaction.Operation, OperationHandler> operationStrategies = new HashMap<>();
         OperationStrategy strategy = new OperationStrategyImpl(operationStrategies);
         ShopService shopService = new ShopServiceImpl(strategy);

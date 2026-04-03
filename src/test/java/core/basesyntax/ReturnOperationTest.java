@@ -29,7 +29,7 @@ public class ReturnOperationTest {
     }
 
     @Test
-    void handle_emptyStorage_NotOk() {
+    void handle_emptyStorage_notOk() {
         Storage storage = new Storage();
         ReturnOperation returnOperation = new ReturnOperation(storage);
         FruitTransaction transaction2 = new FruitTransaction(5, "apple",
@@ -39,7 +39,7 @@ public class ReturnOperationTest {
     }
 
     @Test
-    void handle_nullTransaction_NotOk() {
+    void handle_nullTransaction_notOk() {
         Storage storage = new Storage();
         ReturnOperation returnOperation = new ReturnOperation(storage);
 
