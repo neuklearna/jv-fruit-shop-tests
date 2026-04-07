@@ -1,7 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.service.impl.FileReaderImpl;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.service.impl.FileReaderImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -11,15 +14,12 @@ import java.util.List;
 import java.util.Objects;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class FileReaderImplTest {
 
-    private  FileReaderImpl fileReaderImpl = new FileReaderImpl();
+    private FileReaderImpl fileReaderImpl = new FileReaderImpl();
 
     @Test
     void read_validFile_ok() throws Exception {
-
         URL resource = getClass().getClassLoader().getResource("reportToRead.csv");
         String path = Paths.get(Objects.requireNonNull(resource).toURI()).toString();
 

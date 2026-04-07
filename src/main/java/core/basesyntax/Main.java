@@ -45,7 +45,6 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
-
         ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
         String resultingReport = reportGenerator.getReport();
 
