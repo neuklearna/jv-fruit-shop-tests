@@ -35,7 +35,7 @@ public class SupplyOperationTest {
     }
 
     @Test
-    void handle_emptyStorage_ok() {
+    void handle_emptyStorage_notOk() {
         SupplyOperation operation = new SupplyOperation(storage);
         FruitTransaction transaction = new FruitTransaction(100, "apple",
                 FruitTransaction.Operation.SUPPLY);

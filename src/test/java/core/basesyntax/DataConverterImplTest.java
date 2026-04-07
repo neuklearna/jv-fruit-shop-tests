@@ -27,6 +27,7 @@ public class DataConverterImplTest {
         List<FruitTransaction> result = dataConverter.convertToTransaction(data);
 
         assertEquals(1, result.size());
+        assertEquals(transaction, result.get(0));
     }
 
     @Test
