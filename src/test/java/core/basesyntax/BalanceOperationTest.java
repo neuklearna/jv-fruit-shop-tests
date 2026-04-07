@@ -31,7 +31,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    void handle_twoFruits_ok() {
+    void handle_twoDifferentFruits_ok() {
         FruitTransaction transaction1 = new FruitTransaction(100,"banana",
                 FruitTransaction.Operation.BALANCE);
         FruitTransaction transaction2 = new FruitTransaction(50,"apple",
@@ -60,5 +60,23 @@ public class BalanceOperationTest {
     @Test
     void handle_nullTransaction_notOk() {
         assertThrows(RuntimeException.class, () -> balanceOperation.handle(null));
+    }
+
+    @Test
+    void handle_emptyFruitName_notOk() {
+        assertThrows(NullPointerException.class, () -> {
+            FruitTransaction transaction = new FruitTransaction(100, null,
+                    FruitTransaction.Operation.BALANCE);
+            balanceOperation.handle(transaction);
+        });
+    }
+
+    @Test
+    void handle_nullQuantity_notOk() {
+        assertThrows(NullPointerException.class, () -> {
+            FruitTransaction transaction = new FruitTransaction(null, "apple",
+                    FruitTransaction.Operation.BALANCE);
+            balanceOperation.handle(transaction);
+        });
     }
 }

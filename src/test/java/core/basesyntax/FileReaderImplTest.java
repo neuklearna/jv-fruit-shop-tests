@@ -38,6 +38,6 @@ public class FileReaderImplTest {
 
     @Test
     void read_fileNotExist_notOk() {
-        assertThrows(IOException.class, () -> new FileReaderImpl().read("notExist.csv"));
+        assertThrows(IOException.class, () -> fileReaderImpl.read("notExist.csv"));
     }
 }

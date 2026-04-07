@@ -8,8 +8,14 @@ public class FruitTransaction {
     private String fruit;
     private Operation operation;
 
-    public FruitTransaction(int quantity, String fruit, Operation operation) {
+    public FruitTransaction(Integer quantity, String fruit, Operation operation) {
+        if (quantity == null && quantity < 0) {
+            throw new NullPointerException("operation cannot be null");
+        }
         this.quantity = quantity;
+        if (fruit == null) {
+            throw new NullPointerException("fruit cannot be null");
+        }
         this.fruit = fruit;
         this.operation = operation;
     }

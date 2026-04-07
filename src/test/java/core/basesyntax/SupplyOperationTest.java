@@ -13,22 +13,24 @@ import org.junit.jupiter.api.Test;
 public class SupplyOperationTest {
 
     private Storage storage;
+    private SupplyOperation operation;
+    private BalanceOperation balanceOperation;
 
     @BeforeEach
     void setUp() {
         storage = new Storage();
+        operation = new SupplyOperation(storage);
+        balanceOperation = new BalanceOperation(storage);
     }
 
     @Test
     void handle_addToExisting_ok() {
-        SupplyOperation operation = new SupplyOperation(storage);
-        BalanceOperation operation2 = new BalanceOperation(storage);
         FruitTransaction startValue = new FruitTransaction(20, "banana",
                 FruitTransaction.Operation.BALANCE);
         FruitTransaction transaction = new FruitTransaction(100, "banana",
                 FruitTransaction.Operation.SUPPLY);
 
-        operation2.handle(startValue);
+        balanceOperation.handle(startValue);
         operation.handle(transaction);
 
         assertEquals(120, storage.getStorage().get("banana"));
@@ -36,7 +38,6 @@ public class SupplyOperationTest {
 
     @Test
     void handle_emptyStorage_notOk() {
-        SupplyOperation operation = new SupplyOperation(storage);
         FruitTransaction transaction = new FruitTransaction(100, "apple",
                 FruitTransaction.Operation.SUPPLY);
 
@@ -45,8 +46,6 @@ public class SupplyOperationTest {
 
     @Test
     void handle_multipleSupplies_ok() {
-        SupplyOperation operation = new SupplyOperation(storage);
-        BalanceOperation balanceOperation = new BalanceOperation(storage);
         FruitTransaction balanseOperationValue = new FruitTransaction(20, "apple",
                 FruitTransaction.Operation.BALANCE);
         FruitTransaction transaction = new FruitTransaction(20, "apple",
@@ -63,8 +62,6 @@ public class SupplyOperationTest {
 
     @Test
     void handle_nullTransaction_notOk() {
-        SupplyOperation operation = new SupplyOperation(storage);
-
         assertThrows(RuntimeException.class, () -> operation.handle(null));
     }
 

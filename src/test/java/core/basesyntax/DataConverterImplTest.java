@@ -41,6 +41,17 @@ public class DataConverterImplTest {
         List<FruitTransaction> fruitTransactions = dataConverter.convertToTransaction(data);
 
         assertEquals(4, fruitTransactions.size());
+
+        assertEquals("apple", fruitTransactions.get(0).getFruit());
+        assertEquals("apple", fruitTransactions.get(1).getFruit());
+        assertEquals("apple", fruitTransactions.get(2).getFruit());
+        assertEquals("apple", fruitTransactions.get(3).getFruit());
+
+        assertEquals(100, fruitTransactions.get(0).getQuantity());
+        assertEquals(25, fruitTransactions.get(1).getQuantity());
+        assertEquals(30, fruitTransactions.get(2).getQuantity());
+        assertEquals(15, fruitTransactions.get(3).getQuantity());
+
         assertEquals(FruitTransaction.Operation.BALANCE, fruitTransactions.get(0).getOperation());
         assertEquals(FruitTransaction.Operation.PURCHASE, fruitTransactions.get(1).getOperation());
         assertEquals(FruitTransaction.Operation.SUPPLY, fruitTransactions.get(2).getOperation());
@@ -50,7 +61,6 @@ public class DataConverterImplTest {
     @Test
     void convertToTransaction_invalidQuantity_notOk() {
         List<String> data = List.of("operation,fruit,quantity", "b,apple,abc");
-        DataConverterImpl dataConverter = new DataConverterImpl();
         assertThrows(RuntimeException.class, () -> dataConverter.convertToTransaction(data));
     }
 

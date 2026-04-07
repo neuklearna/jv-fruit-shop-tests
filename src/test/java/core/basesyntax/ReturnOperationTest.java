@@ -13,19 +13,21 @@ import org.junit.jupiter.api.Test;
 public class ReturnOperationTest {
 
     private Storage storage;
+    private BalanceOperation balanceOperation;
+    private ReturnOperation returnOperation;
 
     @BeforeEach
     void setUp() {
         storage = new Storage();
+        balanceOperation = new BalanceOperation(storage);
+        returnOperation = new ReturnOperation(storage);
     }
 
     @Test
     void handle_addReturn_ok() {
-        BalanceOperation balanceOperation = new BalanceOperation(storage);
         FruitTransaction transaction = new FruitTransaction(100, "apple",
                 FruitTransaction.Operation.BALANCE);
 
-        ReturnOperation returnOperation = new ReturnOperation(storage);
         FruitTransaction transaction2 = new FruitTransaction(5, "apple",
                 FruitTransaction.Operation.RETURN);
 
@@ -37,7 +39,6 @@ public class ReturnOperationTest {
 
     @Test
     void handle_emptyStorage_notOk() {
-        ReturnOperation returnOperation = new ReturnOperation(storage);
         FruitTransaction transaction2 = new FruitTransaction(5, "apple",
                 FruitTransaction.Operation.RETURN);
 
@@ -46,8 +47,6 @@ public class ReturnOperationTest {
 
     @Test
     void handle_nullTransaction_notOk() {
-        ReturnOperation returnOperation = new ReturnOperation(storage);
-
         assertThrows(RuntimeException.class, () -> returnOperation.handle(null));
     }
 }
